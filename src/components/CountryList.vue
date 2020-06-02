@@ -2,8 +2,12 @@
     <div>
         <v-row>
             <v-col
-                xs="12" md="3"
-                v-for="{name, capital, population, flag, region} in countryList"
+                xs="12"
+                sm="6"
+                md="4"
+                lg="3"
+                xl="2"
+                v-for="{name, capital, population, flag, region} in countries"
                 :key="name"
             >
                 <Country
@@ -28,16 +32,34 @@ export default {
         Country
     },
     computed: {
-        ...mapState(["countryList"])
+        ...mapState([
+            "countryList",
+            "countryListByName",
+            "countryFilteredByRegion",
+            "filterByRegion"
+        ]),
+        countries() {
+            const countryListByName = this.countryListByName;
+
+            if (this.filterByRegion !== "" && countryListByName.length === 0) {
+                return this.countryFilteredByRegion;
+            }
+
+            if (countryListByName.length > 0) {
+                return countryListByName;
+            }
+
+            return this.countryList;
+        }
     },
     methods: {
-        ...mapMutations(["load"])
+        ...mapMutations(["setCountryList"])
     },
     mounted() {
         fetch("https://restcountries.eu/rest/v2/all")
             .then(response => response.json())
             .then(list => {
-                this.load({ type: "SET_COUNTRY_LIST", payload: list });
+                this.setCountryList(list);
             });
     }
 };

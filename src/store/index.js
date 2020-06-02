@@ -11,12 +11,32 @@ export default new Vuex.Store({
         filterByRegion: "",
     },
     mutations: {
-        load(state, action) {
-            switch (action.type) {
-                case "SET_COUNTRY_LIST": {
-                    state.countryList = action.payload;
-                }
+        setCountryList(state, list) {
+            state.countryList = list;
+        },
+        setCountryListByName(state, name) {
+            if (name === "") {
+                state.countryListByName = [];
+            } else {
+                let list;
 
+                list =
+                    state.filterByRegion === ""
+                        ? state.countryList
+                        : state.countryFilteredByRegion;
+
+                const countryListByName = list.filter((country) => country.name.toLowerCase().includes(name.toLowerCase()));
+                state.countryListByName = countryListByName;
+            }
+        },
+        setCountryFilteredByRegion(state, region) {
+            state.filterByRegion = region;
+
+            if (region === "") {
+                state.countryFilteredByRegion = [];
+            } else {
+                const countryFilteredByRegion = state.countryList.filter((country) => country.region === region);
+                state.countryFilteredByRegion = countryFilteredByRegion;
             }
         },
     },

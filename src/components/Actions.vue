@@ -3,10 +3,23 @@
         <v-form>
             <v-row>
                 <v-col>
-                    <v-text-field label="Search for a country"></v-text-field>
+                    <v-text-field
+                        v-model="inputValue"
+                        @keyup="filterByName"
+                        label="Search for a country"
+                        clear-icon="backspace"
+                        clearable
+                        @click:clear="clearInput()"
+                    ></v-text-field>
                 </v-col>
                 <v-col>
-                    <v-select :items="items" label="Filter by region" outlined></v-select>
+                    <v-select
+                        :items="items"
+                        @change="filterByRegion"
+                        v-model="selectValue"
+                        label="Filter by region"
+                        outlined
+                    ></v-select>
                 </v-col>
             </v-row>
         </v-form>
@@ -14,10 +27,16 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
     name: "Actions",
     data: () => ({
         items: [
+            {
+                text: "Filter by region",
+                value: ""
+            },
             {
                 text: "Africa",
                 value: "Africa"
@@ -38,8 +57,22 @@ export default {
                 text: "Oceania",
                 value: "Oceania"
             }
-        ]
-    })
+        ],
+        inputValue: "",
+        selectValue: ""
+    }),
+    methods: {
+        ...mapMutations(["setCountryListByName", "setCountryFilteredByRegion"]),
+        filterByName() {
+            this.setCountryListByName(this.inputValue);
+        },
+        filterByRegion() {
+            this.setCountryFilteredByRegion(this.selectValue);
+        },
+        clearInput() {
+            this.setCountryListByName("");
+        }
+    }
 };
 </script>
 
