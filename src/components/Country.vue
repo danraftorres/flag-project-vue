@@ -1,7 +1,7 @@
 <template>
     <div>
-        <router-link :to="{name: 'CountryPage', params: {id: alpha2Code }}">
-        <v-card>
+        <!-- <router-link :to="{name: 'CountryPage', params: {id: alpha2Code }}"> -->
+        <v-card @click="handleClick">
             <v-img :src="flag" height="150"></v-img>
 
             <v-card-title class="pb-0">{{ name }}</v-card-title>
@@ -37,14 +37,19 @@
                 </v-list-item>
             </v-list>
         </v-card>
-        </router-link>
+        <!-- </router-link> -->
     </div>
 </template>
 
 <script>
 export default {
     name: "Country",
-    props: ["name", "capital", "population", "flag", "region", 'alpha2Code']
+    props: ["name", "capital", "population", "flag", "region", 'alpha2Code'],
+    methods: {
+        handleClick() {
+            this.$router.push(`/country/${this.alpha2Code}`);
+        }
+    }
 };
 </script>
 

@@ -4,7 +4,7 @@
         <v-row>
             <v-col class="text-left" cols="12">
                 <div class="my-2">
-                    <v-btn color="primary">
+                    <v-btn color="primary" @click="handleClick">
                         <v-icon left dark>arrow_back_ios</v-icon>Back
                     </v-btn>
                 </div>
@@ -55,6 +55,11 @@ export default {
     },
     computed: { 
         ...mapState(["countryList"]) 
+    },
+    methods: {
+        handleClick() {
+            this.$router.go(-1);
+        }
     },
     beforeMount() {
         fetch(`https://restcountries.eu/rest/v2/alpha/${this.$route.params.id.toLowerCase()}`)

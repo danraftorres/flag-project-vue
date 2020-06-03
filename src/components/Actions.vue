@@ -2,10 +2,10 @@
     <div>
         <v-form>
             <v-row>
-                <v-col xs="12" sm="12" md="6" lg="6" xl="6">
+                <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
                     <SearchByName></SearchByName>
                 </v-col>
-                <v-col xs="12" sm="12" md="6" lg="6" xl="6">
+                <v-col cols="12" xs="12" sm="12" md="6" lg="6" xl="6">
                     <FilterByRegion></FilterByRegion>
                 </v-col>
             </v-row>

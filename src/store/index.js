@@ -8,6 +8,7 @@ export default new Vuex.Store({
         countryList: [],
         countryListByName: [],
         countryFilteredByRegion: [],
+        searchByName: "",
         filterByRegion: "",
     },
     mutations: {
@@ -15,6 +16,8 @@ export default new Vuex.Store({
             state.countryList = list;
         },
         setCountryListByName(state, name) {
+            state.searchByName = name;
+
             if (name === "") {
                 state.countryListByName = [];
             } else {
