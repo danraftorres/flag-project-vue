@@ -7,16 +7,19 @@
                 md="4"
                 lg="3"
                 xl="2"
-                v-for="{name, capital, population, flag, region} in countries"
+                v-for="{name, capital, population, flag, region, alpha2Code} in countries"
                 :key="name"
             >
-                <Country
-                    :name="name"
-                    :capital="capital"
-                    :population="population"
-                    :flag="flag"
-                    :region="region"
-                />
+                
+                    <Country
+                        :name="name"
+                        :capital="capital"
+                        :population="population"
+                        :flag="flag"
+                        :region="region"
+                        :alpha2Code="alpha2Code"
+                    />
+               
             </v-col>
         </v-row>
     </div>
@@ -36,7 +39,7 @@ export default {
             "countryList",
             "countryListByName",
             "countryFilteredByRegion",
-            "filterByRegion"
+            "filterByRegion",
         ]),
         countries() {
             const countryListByName = this.countryListByName;
@@ -55,7 +58,7 @@ export default {
     methods: {
         ...mapMutations(["setCountryList"])
     },
-    mounted() {
+    beforeMount() {
         fetch("https://restcountries.eu/rest/v2/all")
             .then(response => response.json())
             .then(list => {

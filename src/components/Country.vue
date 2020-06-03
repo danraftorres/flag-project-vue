@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link :to="{name: 'CountryPage', params: {id: alpha2Code }}">
         <v-card>
             <v-img :src="flag" height="150"></v-img>
 
@@ -36,13 +37,14 @@
                 </v-list-item>
             </v-list>
         </v-card>
+        </router-link>
     </div>
 </template>
 
 <script>
 export default {
     name: "Country",
-    props: ["name", "capital", "population", "flag", "region"]
+    props: ["name", "capital", "population", "flag", "region", 'alpha2Code']
 };
 </script>
 
