@@ -1,10 +1,7 @@
 <template>
     <div>
         <v-card>
-            <v-img
-                :src="flag"
-                height="150"
-            ></v-img>
+            <v-img :src="flag" height="150"></v-img>
 
             <v-card-title class="pb-0">{{ name }}</v-card-title>
 
@@ -45,9 +42,15 @@
 <script>
 export default {
     name: "Country",
-    props: ['name', 'capital', 'population', 'flag', 'region'],
+    props: ["name", "capital", "population", "flag", "region"]
 };
 </script>
 
 <style lang="scss" scoped>
+.v-card {
+    cursor: pointer;
+    &:hover {
+        border: 1px solid black;
+    }
+}
 </style>
